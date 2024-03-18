@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="icon" href="./img/fav.png" type="image/png" />
+    <!-- manifest -->
+    <link rel="manifest" href="site.webmanifest" />
+    <!-- style -->
+    <link rel="stylesheet" href="./style/bootstrap.css">
+    <link rel="stylesheet" href="./style/index.css">
+    <title>CICMIND</title>
+</head>
+
+<body class="d-flex flex-column vh-100">
+    <video class="bk-video" src="./video/bk.mp4" autoplay muted loop></video>
+    <header class="p-2">
+        <nav class="h-100 d-flex align-items-center">
+            <div class="col">
+                <img class="logo" src="./img/logo.png" alt="logo">
+            </div>
+            <div class="col text-center">
+                <h1 class="mb-0">Mastermind</h1>
+                <p id="header_score" class="mb-0">00</p>
+            </div>
+            <div class="col text-end">
+                <button type="button" id="generate" class="btn btn-outline-light material-symbols-outlined p-1">
+                    refresh
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow-1">
+        <div class="text-center p-2">
+            <div class="dropdown-color">
+                <label id="bt_1" data-value="0" for="input_1"></label>
+                <input type="checkbox" class="d-none" id="input_1">
+                <ul id="select_1" class="dropdown-content">
+                    <li value="1" selected="0"></li>
+                    <li value="2" selected="0"></li>
+                    <li value="3" selected="0"></li>
+                    <li value="4" selected="0"></li>
+                    <li value="5" selected="0"></li>
+                    <li value="6" selected="0"></li>
+                    <li value="7" selected="0"></li>
+                    <li value="8" selected="0"></li>
+                    <li value="9" selected="0"></li>
+                </ul>
+            </div>
+
+            <div class="dropdown-color">
+                <label id="bt_2" data-value="0" for="input_2"></label>
+                <input type="checkbox" class="d-none" id="input_2">
+                <ul id="select_2" class="dropdown-content">
+                    <li value="1" selected="0"></li>
+                    <li value="2" selected="0"></li>
+                    <li value="3" selected="0"></li>
+                    <li value="4" selected="0"></li>
+                    <li value="5" selected="0"></li>
+                    <li value="6" selected="0"></li>
+                    <li value="7" selected="0"></li>
+                    <li value="8" selected="0"></li>
+                    <li value="9" selected="0"></li>
+                </ul>
+            </div>
+
+            <div class="dropdown-color">
+                <label id="bt_3" data-value="0" for="input_3"></label>
+                <input type="checkbox" class="d-none" id="input_3">
+                <ul id="select_3" class="dropdown-content">
+                    <li value="1" selected="0"></li>
+                    <li value="2" selected="0"></li>
+                    <li value="3" selected="0"></li>
+                    <li value="4" selected="0"></li>
+                    <li value="5" selected="0"></li>
+                    <li value="6" selected="0"></li>
+                    <li value="7" selected="0"></li>
+                    <li value="8" selected="0"></li>
+                    <li value="9" selected="0"></li>
+                </ul>
+            </div>
+
+            <div class="dropdown-color">
+                <label id="bt_4" data-value="0" for="input_4"></label>
+                <input type="checkbox" class="d-none" id="input_4">
+                <ul id="select_4" class="dropdown-content">
+                    <li value="1" selected="0"></li>
+                    <li value="2" selected="0"></li>
+                    <li value="3" selected="0"></li>
+                    <li value="4" selected="0"></li>
+                    <li value="5" selected="0"></li>
+                    <li value="6" selected="0"></li>
+                    <li value="7" selected="0"></li>
+                    <li value="8" selected="0"></li>
+                    <li value="9" selected="0"></li>
+                </ul>
+            </div>
+
+            <div class="dropdown-color">
+                <label id="bt_5" data-value="0" for="input_5"></label>
+                <input type="checkbox" class="d-none" id="input_5">
+                <ul id="select_5" class="dropdown-content">
+                    <li value="1" selected="0"></li>
+                    <li value="2" selected="0"></li>
+                    <li value="3" selected="0"></li>
+                    <li value="4" selected="0"></li>
+                    <li value="5" selected="0"></li>
+                    <li value="6" selected="0"></li>
+                    <li value="7" selected="0"></li>
+                    <li value="8" selected="0"></li>
+                    <li value="9" selected="0"></li>
+                </ul>
+            </div>
+
+            <div class="dropdown-color">
+                <label id="try" class="ms-3">
+                    <span class="material-symbols-outlined">
+                        expand_more
+                    </span>
+
+                </label>
+            </div>
+            <p id="info_select" class="text-danger mb-0"></p>
+            <hr class="border border-3">
+        </div>
+        <div class="container-fluid">
+            <div id="game" class="row align-items-center text-center">
+
+
+                <!-- <div class="col-8">                    
+                    <span class="color-box id"><span>1</span></span>
+                    <span class="color-box" value="2"></span>
+                    <span class="color-box" value="5"></span>
+                    <span class="color-box" value="1"></span>
+                    <span class="color-box" value="9"></span>
+                    <span class="color-box" value="8"></span>
+                </div>
+                <div class="col-4">
+                    <div class="brain-box">
+                        <img class="positio-correct" src="./img/points/1.svg">
+                        <img src="./img/points/2.svg">
+                        <img src="./img/points/3.svg">
+                        <img src="./img/points/4.svg">
+                        <img src="./img/points/5.svg">
+                    </div>
+                </div>
+
+                <hr class="border border-1 my-1"> -->
+
+            </div>
+        </div>
+        <div id="modal_container"></div>
+    </main>
+
+    <footer>
+        <p class="p-2 mb-0 text-center">Made white &hearts; Antonino Cicala</p>
+    </footer>
+
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
