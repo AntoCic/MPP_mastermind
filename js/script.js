@@ -1,6 +1,9 @@
+// Inizializzo variabili del DOM
+// header
 const header_score = document.getElementById("header_score");
 const generate = document.getElementById("generate");
 
+// main
 const bt_1 = document.getElementById("bt_1");
 const input_1 = document.getElementById("input_1");
 const option_1 = document.querySelectorAll("#select_1 li");
@@ -20,18 +23,22 @@ const option_5 = document.querySelectorAll("#select_5 li");
 const tryE = document.getElementById("try");
 const info_select = document.getElementById("info_select");
 
+const game_container = document.getElementById("game_container");
 const game = document.getElementById("game");
 const modal_container = document.getElementById("modal_container");
 
+// Inizializzo variabili utili
 const combinationLength = 5;
 const quantityColor = 9;
 const maxRounds = 10;
 let combination = getStringCombination(combinationLength, quantityColor);
-
 let idCounter = 1;
 
+// Azzero il punteggio nel DOM
 header_score.textContent = maxRounds;
 
+// Funzione che data una lunghezza e un valore massimo
+// ritorna un Array di numeri interi casuali
 function getStringCombination(quantity, maxVal) {
   let c = [];
   for (let index = 0; index < quantity; index++) {
@@ -39,11 +46,26 @@ function getStringCombination(quantity, maxVal) {
   }
   return c;
 }
+// Funzione che dato un valore massimo
+// ritorna un numero intero casuale
 function getRandomNum(maxVal) {
   const n = Math.round(Math.random() * (maxVal - 1)) + 1;
   return n;
 }
 
+// Funzione che legge la combinazione che ha inserito l'utente
+function getUserCombination() {
+  let uc = [
+    bt_1.dataset.value,
+    bt_2.dataset.value,
+    bt_3.dataset.value,
+    bt_4.dataset.value,
+    bt_5.dataset.value,
+  ];
+  return uc;
+}
+
+// Funzione che chiude tutte le dropdown dei colori
 function closeAllSelect() {
   input_1.checked = false;
   input_2.checked = false;
@@ -51,7 +73,36 @@ function closeAllSelect() {
   input_4.checked = false;
   input_5.checked = false;
 }
+// Funzione che resetta i colori
+function resetAllSelect() {
+  bt_1.dataset.value = "0";
+  bt_2.dataset.value = "0";
+  bt_3.dataset.value = "0";
+  bt_4.dataset.value = "0";
+  bt_5.dataset.value = "0";
+}
 
+// Funzione che restituisce il punteggio
+function getScore(n=0) {
+  return String(maxRounds + n - idCounter).padStart(2, "0");
+}
+
+// Gestione click sul btn di reset del gioco (nell'header)
+generate.addEventListener("click", () => {
+  while (modal_container.firstChild) modal_container.firstChild.remove();
+  game_container.style.overflow="auto";
+  combination = getStringCombination(combinationLength, quantityColor);
+  idCounter = 1;
+  header_score.textContent = maxRounds;
+  info_select.textContent = "";
+
+  closeAllSelect();
+  resetAllSelect();
+
+  while (game.firstChild) game.firstChild.remove();
+});
+
+// Gestione click sulle select dei colori
 for (let index = 0; index < quantityColor; index++) {
   const n = String(index + 1);
 
@@ -77,23 +128,7 @@ for (let index = 0; index < quantityColor; index++) {
   });
 }
 
-generate.addEventListener("click", () => {
-  while (modal_container.firstChild) modal_container.firstChild.remove();
-
-  combination = getStringCombination(combinationLength, quantityColor);
-  idCounter = 1;
-  header_score.textContent = maxRounds;
-  info_select.textContent = "";
-
-  closeAllSelect();
-  bt_1.dataset.value = "0";
-  bt_2.dataset.value = "0";
-  bt_3.dataset.value = "0";
-  bt_4.dataset.value = "0";
-  bt_5.dataset.value = "0";
-  while (game.firstChild) game.firstChild.remove();
-});
-
+// Gestione click sul btn controllo combinazione
 tryE.addEventListener("click", () => {
   info_select.textContent = "";
   closeAllSelect();
@@ -107,62 +142,30 @@ tryE.addEventListener("click", () => {
     const userCombination = getUserCombination();
     const matching = checkMatching(combination, userCombination);
     showResult(matching, userCombination);
+    
+    if (maxRounds - idCounter === 0) {
+      header_score.textContent = getScore();
+      game_container.style.overflow="hidden";
+      modal_container.appendChild(generateModalGameOver());
 
-    if (matching[1] === combinationLength) {
-      const modal = document.createElement("div");
-      modal.classList.add("ms_modal");
-      modal.innerHTML = `
-          <div class="ms_modal-box ms_win p-1 p-md-3">
-            <h1>YOU WIN</h1>
-            <p class="h3">score: ${String(maxRounds + 1 - idCounter).padStart(
-              2,
-              "0"
-            )}</p>
-          </div>
-      `;
-      modal_container.appendChild(modal);
-    } else if (maxRounds - idCounter === 0) {
-      header_score.textContent = String(maxRounds - idCounter).padStart(2, "0");
+    } else if (matching[1] === combinationLength) {
+      game_container.style.overflow="hidden";
+      modal_container.appendChild(generateModalWin());
 
-      const modal = document.createElement("div");
-      modal.classList.add("ms_modal");
-
-      const modal_box = document.createElement("div");
-      modal_box.classList.add("ms_modal-box", "p-1", "p-md-3");
-      modal.appendChild(modal_box);
-
-      const h1 = document.createElement("h1");
-      h1.classList.add("mb-0");
-      h1.textContent="GAME OVER";
-      modal_box.appendChild(h1);
-      combination.forEach((e) => {
-        const span = document.createElement("span");
-        span.classList.add("color-box", "mx-1");
-        span.setAttribute("value", e);
-        modal_box.appendChild(span);
-      });
-
-      modal_container.appendChild(modal);
     } else {
-      header_score.textContent = String(maxRounds - idCounter).padStart(2, "0");
+      header_score.textContent = getScore();
       idCounter++;
+
     }
   } else {
     info_select.textContent = "Scegli tutti i colori";
   }
 });
 
-function getUserCombination() {
-  let uc = [
-    bt_1.dataset.value,
-    bt_2.dataset.value,
-    bt_3.dataset.value,
-    bt_4.dataset.value,
-    bt_5.dataset.value,
-  ];
-  return uc;
-}
-
+// Funzione che confronta le due combinazioni e
+// ritorna un Array contenente
+// la quantitá dei numeri uguali e
+// la quantitá dei numeri uguali nella posizione corretta
 function checkMatching(comb, userComb) {
   let combCopy = [...comb];
   let userCombCopy = [...userComb];
@@ -171,11 +174,15 @@ function checkMatching(comb, userComb) {
   let correctPosition = 0;
   for (let i = 0; i < length; i++) {
     for (let ii = 0; ii < length; ii++) {
+      // confronto la mia combinazione con quella generata
+      // -- se facessi il contrario ci serebbe un problema nel contare le correctPosition
+      // -- perché azzerando userCombCopy e combCopy il contatore non si incrementerebbe correttamente
       if (userCombCopy[i] === combCopy[ii] && userCombCopy[i] != "0") {
         correctNumber++;
         if (userCombCopy[i] === combCopy[i]) {
           correctPosition++;
         }
+        // li azzero per non far ricontare i numeri uguali giá contati
         userCombCopy[i] = 0;
         combCopy[ii] = 0;
       }
@@ -184,6 +191,8 @@ function checkMatching(comb, userComb) {
   return [correctNumber, correctPosition];
 }
 
+// Funzione che crea un elemento nel DOM che mostra il risultato
+// della combinazione inserita
 function showResult(matching, userCombination) {
   const hr = document.createElement("hr");
   hr.classList.add("border", "border-1", "my-1");
@@ -222,8 +231,39 @@ function showResult(matching, userCombination) {
   });
 
   game.prepend(col_8);
+}
 
-  
+// genera la modale you win
+function generateModalWin() {
+  const modal = document.createElement("div");
+  modal.classList.add("ms_modal");
+  modal.innerHTML = `
+          <div class="ms_modal-box ms_win p-1 p-md-3">
+            <h1>YOU WIN</h1>
+            <p class="h3">score: ${getScore(1)}</p>
+          </div>
+      `;
+  return modal;
+}
 
-  
+// genera la modale game over
+function generateModalGameOver() {
+  const modal = document.createElement("div");
+  modal.classList.add("ms_modal");
+
+  const modal_box = document.createElement("div");
+  modal_box.classList.add("ms_modal-box", "p-1", "p-md-3");
+  modal.appendChild(modal_box);
+
+  const h1 = document.createElement("h1");
+  h1.classList.add("mb-0");
+  h1.textContent = "GAME OVER";
+  modal_box.appendChild(h1);
+  combination.forEach((e) => {
+    const span = document.createElement("span");
+    span.classList.add("color-box", "mx-1");
+    span.setAttribute("value", e);
+    modal_box.appendChild(span);
+  });
+  return modal;
 }
