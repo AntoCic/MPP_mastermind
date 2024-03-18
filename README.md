@@ -1,4 +1,4 @@
-# Campo minato
+# Mastermind
 
 Mastermind è un gioco di logica tra due giocatori: uno (PC) che fa da "codificatore" e crea un codice segreto, e l'altro (TU) che fa da "decodificatore" e cerca di indovinare il codice entro un numero limitato di tentativi.
 
