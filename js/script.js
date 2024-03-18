@@ -25,7 +25,7 @@ const modal_container = document.getElementById("modal_container");
 
 const combinationLength = 5;
 const quantityColor = 9;
-const maxRounds = 20;
+const maxRounds = 10;
 let combination = getStringCombination(combinationLength, quantityColor);
 
 let idCounter = 1;
@@ -126,11 +126,22 @@ tryE.addEventListener("click", () => {
 
       const modal = document.createElement("div");
       modal.classList.add("ms_modal");
-      modal.innerHTML = `
-      <div class="ms_modal-box p-1 p-md-3">
-        <h1 class="mb-0">GAME OVER</h1>
-      </div>
-  `;
+
+      const modal_box = document.createElement("div");
+      modal_box.classList.add("ms_modal-box", "p-1", "p-md-3");
+      modal.appendChild(modal_box);
+
+      const h1 = document.createElement("h1");
+      h1.classList.add("mb-0");
+      h1.textContent="GAME OVER";
+      modal_box.appendChild(h1);
+      combination.forEach((e) => {
+        const span = document.createElement("span");
+        span.classList.add("color-box", "mx-1");
+        span.setAttribute("value", e);
+        modal_box.appendChild(span);
+      });
+
       modal_container.appendChild(modal);
     } else {
       header_score.textContent = String(maxRounds - idCounter).padStart(2, "0");
@@ -174,6 +185,25 @@ function checkMatching(comb, userComb) {
 }
 
 function showResult(matching, userCombination) {
+  const hr = document.createElement("hr");
+  hr.classList.add("border", "border-1", "my-1");
+  game.prepend(hr);
+
+  const col_4 = document.createElement("div");
+  col_4.classList.add("col-4");
+  const brain_box = document.createElement("div");
+  brain_box.classList.add("brain-box");
+  for (let index = 1; index <= matching[0]; index++) {
+    const img = document.createElement("img");
+    img.setAttribute("src", "./img/points/" + String(index) + ".svg");
+    if (index <= matching[1]) {
+      img.classList.add("positio-correct");
+    }
+    brain_box.appendChild(img);
+  }
+  col_4.appendChild(brain_box);
+  game.prepend(col_4);
+
   const col_8 = document.createElement("div");
   col_8.classList.add("col-8");
 
@@ -191,27 +221,9 @@ function showResult(matching, userCombination) {
     col_8.appendChild(span);
   });
 
-  game.appendChild(col_8);
+  game.prepend(col_8);
 
-  const col_4 = document.createElement("div");
-  col_4.classList.add("col-4");
+  
 
-  const brain_box = document.createElement("div");
-  brain_box.classList.add("brain-box");
-  for (let index = 1; index <= matching[0]; index++) {
-    const img = document.createElement("img");
-    // span.classList.add("color-box");
-    img.setAttribute("src", "./img/points/" + String(index) + ".svg");
-    if (index <= matching[1]) {
-      img.classList.add("positio-correct");
-    }
-    brain_box.appendChild(img);
-  }
-
-  col_4.appendChild(brain_box);
-  game.appendChild(col_4);
-
-  const hr = document.createElement("hr");
-  hr.classList.add("border", "border-1", "my-1");
-  game.appendChild(hr);
+  
 }

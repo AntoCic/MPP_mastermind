@@ -10,7 +10,7 @@
   --color5: #33c1b1;
   --color6: #6f440c;
   --color7: #7e2911;
-  --color8: #ee9781;
+  --color8: #e9b4a7;
   --color9: #9068ba;
 }
 
@@ -223,7 +223,7 @@ main .container-fluid {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 2px;
+  bottom: -2px;
 }
 
 .brain-box {
