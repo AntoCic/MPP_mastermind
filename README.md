@@ -4,7 +4,7 @@ Mastermind è un gioco di logica tra due giocatori: uno (PC) che fa da "codifica
 
 ## Sito prova
 
-
+https://cicmind.netlify.app
 
 ## Regole base:
 
