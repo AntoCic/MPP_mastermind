@@ -144,9 +144,13 @@ tryE.addEventListener("click", () => {
     showResult(matching, userCombination);
 
     if (maxRounds - idCounter === 0) {
-      header_score.textContent = getScore();
-      modal_container.appendChild(generateModalGameOver());
-    } else if (matching[1] === combinationLength) {
+      if (isWon(matching[1])) {
+        modal_container.appendChild(generateModalWin());
+      } else {
+        header_score.textContent = getScore();
+        modal_container.appendChild(generateModalGameOver());
+      }
+    } else if (isWon(matching[1])) {
       modal_container.appendChild(generateModalWin());
     } else {
       header_score.textContent = getScore();
@@ -226,6 +230,14 @@ function showResult(matching, userCombination) {
   });
 
   game.prepend(col_8);
+}
+
+// Controlla se ha vinto
+function isWon(quantityCorrectPositionAndColor) {
+  if (quantityCorrectPositionAndColor === combinationLength) {
+    return true;
+  }
+  return false;
 }
 
 // genera la modale you win

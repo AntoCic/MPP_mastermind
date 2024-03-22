@@ -259,6 +259,7 @@ main .container-fluid {
   display: flex;
   justify-content: center;
   align-items: center;
+  user-select: none;
 }
 .ms_modal-box {
   border-radius: 1em;
