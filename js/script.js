@@ -2,6 +2,7 @@
 // header
 const header_score = document.getElementById("header_score");
 const reload = document.getElementById("reload");
+const btInfo = document.querySelector('header [for="info"]');
 
 // main
 const bt_1 = document.getElementById("bt_1");
@@ -101,7 +102,16 @@ reload.addEventListener("click", () => {
 
   while (game.firstChild) game.firstChild.remove();
 });
-
+// Gestione click sul btn info regole di gioco
+btInfo.addEventListener("click", () => {
+  if (btInfo.textContent.trim() === "info") {
+    btInfo.textContent = "close";
+    btInfo.classList.toggle("btn-hover");
+  } else {
+    btInfo.textContent = "info";
+    btInfo.classList.toggle("btn-hover");
+  }
+});
 // Gestione click sulle select dei colori
 for (let index = 0; index < quantityColor; index++) {
   const n = String(index + 1);

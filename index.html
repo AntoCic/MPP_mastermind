@@ -30,6 +30,9 @@
                 <button type="button" id="reload" class="btn btn-outline-light material-symbols-outlined p-1">
                     refresh
                 </button>
+                <label for="info" class="btn btn-outline-light material-symbols-outlined p-1">
+                    info
+                </label>
             </div>
         </nav>
     </header>
@@ -154,7 +157,49 @@
             </div>
 
         </div>
-        <div id="modal_container"></div>
+        <div id="modal_container">
+
+        </div>
+        <input type="checkbox" class="d-none" id="info" checked>
+        <div class="ms_modal info-modal">
+            <div class="ms_modal-box ms_info p-1 p-md-3">
+                <h1 class="mb-0">Regole</h1>
+                <ol>
+                    <li>
+                        <Strong>Preparazione</Strong>: Il codificatore sceglie in segreto una combinazione di colori.
+                        Questa
+                        combinazione è composta da 5 colori, scelte da un assortimento fisso di 9 colori. I colori
+                        possono ripetersi.
+                    </li>
+
+                    <li><strong>Tentativi del decodificatore</strong>: Il decodificatore fa dei tentativi per indovinare
+                        la
+                        combinazione segreta, inserendo una serie di 5 pedine per volta. Dopo ogni tentativo, il
+                        codificatore fornisce dei feedback.
+                    </li>
+                    <li><strong>Feedback</strong>: Per ogni tentativo, il codificatore fornisce due tipi di indicazioni:
+                        - Quante pedine sono del colore giusto e nella posizione giusta (indicato con pezzetto di
+                        cervello verde).
+                        - Quante pedine sono del colore giusto ma nella posizione sbagliata (indicato con pezzetto
+                        di
+                        cervello bianco). <br>
+                        Nota: il codificatore non dice quali specifiche pedine sono corrette, solo il numero totale.
+                    </li>
+                    <li><strong>Obiettivo</strong>: L'obiettivo del decodificatore è indovinare l'esatta combinazione di
+                        colori
+                        (sia ordine che colore) entro un numero limitato di 14 tentativi.
+                    </li>
+                    <li>
+                        <strong>Vincita</strong>: Se il decodificatore indovina la combinazione corretta entro il numero
+                        stabilito
+                        di tentativi, vince. Se non ci riesce, il codificatore rivela la combinazione segreta e
+                        vince
+                        lui.
+                    </li>
+                </ol>
+
+            </div>
+        </div>
     </main>
 
     <footer>
