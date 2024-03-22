@@ -1,7 +1,7 @@
 // Inizializzo variabili del DOM
 // header
 const header_score = document.getElementById("header_score");
-const generate = document.getElementById("generate");
+const reload = document.getElementById("reload");
 
 // main
 const bt_1 = document.getElementById("bt_1");
@@ -30,7 +30,7 @@ const modal_container = document.getElementById("modal_container");
 // Inizializzo variabili utili
 const combinationLength = 5;
 const quantityColor = 9;
-const maxRounds = 10;
+const maxRounds = 14;
 let combination = getStringCombination(combinationLength, quantityColor);
 let idCounter = 1;
 
@@ -83,15 +83,15 @@ function resetAllSelect() {
 }
 
 // Funzione che restituisce il punteggio
-function getScore(n=0) {
+function getScore(n = 0) {
   return String(maxRounds + n - idCounter).padStart(2, "0");
 }
 
 // Gestione click sul btn di reset del gioco (nell'header)
-generate.addEventListener("click", () => {
+reload.addEventListener("click", () => {
   while (modal_container.firstChild) modal_container.firstChild.remove();
-  game_container.style.overflow="auto";
   combination = getStringCombination(combinationLength, quantityColor);
+  console.log(combination);
   idCounter = 1;
   header_score.textContent = maxRounds;
   info_select.textContent = "";
@@ -142,20 +142,15 @@ tryE.addEventListener("click", () => {
     const userCombination = getUserCombination();
     const matching = checkMatching(combination, userCombination);
     showResult(matching, userCombination);
-    
+
     if (maxRounds - idCounter === 0) {
       header_score.textContent = getScore();
-      game_container.style.overflow="hidden";
       modal_container.appendChild(generateModalGameOver());
-
     } else if (matching[1] === combinationLength) {
-      game_container.style.overflow="hidden";
       modal_container.appendChild(generateModalWin());
-
     } else {
       header_score.textContent = getScore();
       idCounter++;
-
     }
   } else {
     info_select.textContent = "Scegli tutti i colori";

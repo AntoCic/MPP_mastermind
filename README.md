@@ -18,7 +18,7 @@ https://cicmind.netlify.app
 
    Nota: il codificatore non dice quali specifiche pedine sono corrette, solo il numero totale.
 
-4. **Obiettivo**: L'obiettivo del decodificatore è indovinare l'esatta combinazione di colori (sia ordine che colore) entro un numero limitato di 10 tentativi.
+4. **Obiettivo**: L'obiettivo del decodificatore è indovinare l'esatta combinazione di colori (sia ordine che colore) entro un numero limitato di 14 tentativi.
 
 5. **Vincita**: Se il decodificatore indovina la combinazione corretta entro il numero stabilito di tentativi, vince. Se non ci riesce, il codificatore rivela la combinazione segreta e vince lui.
 

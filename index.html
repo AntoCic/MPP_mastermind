@@ -27,14 +27,14 @@
                 <p id="header_score" class="mb-0">00</p>
             </div>
             <div class="col text-end">
-                <button type="button" id="generate" class="btn btn-outline-light material-symbols-outlined p-1">
+                <button type="button" id="reload" class="btn btn-outline-light material-symbols-outlined p-1">
                     refresh
                 </button>
             </div>
         </nav>
     </header>
 
-    <main class="flex-grow-1">
+    <main class="flex-grow-1 position-relative">
         <div class="text-center p-2">
             <div class="dropdown-color">
                 <label id="bt_1" data-value="0" for="input_1"></label>
@@ -127,7 +127,7 @@
             <p id="info_select" class="text-danger mb-0"></p>
             <hr class="border border-3">
         </div>
-        <div id="game_container" class="container-fluid position-relative">
+        <div id="game_container" class="container-fluid">
             <div id="game" class="row align-items-center text-center">
 
 
@@ -152,8 +152,9 @@
                 <hr class="border border-1 my-1"> -->
 
             </div>
-            <div id="modal_container"></div>
+
         </div>
+        <div id="modal_container"></div>
     </main>
 
     <footer>

@@ -92,7 +92,6 @@ ul li[value="9"],
   position: sticky;
   top: 10px;
   display: inline-block;
-  z-index: 1;
 }
 
 .dropdown-color label {
@@ -260,12 +259,11 @@ main .container-fluid {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.3);
-  z-index: 2;
 }
 .ms_modal-box {
   border-radius: 1em;
-  border: 2px solid rgba(158, 21, 21, 0.6);
+  border: 4px solid rgba(158, 21, 21, 0.8);
+  color: rgb(133, 8, 8);
   background-color: rgba(255, 255, 255, 0.6);
 }
 .ms_modal-box.ms_win {
