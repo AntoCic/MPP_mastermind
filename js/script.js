@@ -92,7 +92,6 @@ function getScore(n = 0) {
 reload.addEventListener("click", () => {
   while (modal_container.firstChild) modal_container.firstChild.remove();
   combination = getStringCombination(combinationLength, quantityColor);
-  console.log(combination);
   idCounter = 1;
   header_score.textContent = maxRounds;
   info_select.textContent = "";
@@ -152,6 +151,7 @@ tryE.addEventListener("click", () => {
     const userCombination = getUserCombination();
     const matching = checkMatching(combination, userCombination);
     showResult(matching, userCombination);
+    
 
     if (maxRounds - idCounter === 0) {
       if (isWon(matching[1])) {
@@ -188,13 +188,16 @@ function checkMatching(comb, userComb) {
       // -- perché azzerando userCombCopy e combCopy il contatore non si incrementerebbe correttamente
       if (userCombCopy[i] === combCopy[ii] && userCombCopy[i] != "0") {
         correctNumber++;
-        if (userCombCopy[i] === combCopy[i]) {
-          correctPosition++;
-        }
         // li azzero per non far ricontare i numeri uguali giá contati
         userCombCopy[i] = 0;
         combCopy[ii] = 0;
       }
+    }
+    // controllo a ogni giro se il numero della combinazione inserita dall'utente é == alla combinazione
+    // creata casualmente (non uso gli array copiati)
+    // se true incremento il contatore di posizioni corrette
+    if (userComb[i] === comb[i]) {
+      correctPosition++;
     }
   }
   return [correctNumber, correctPosition];
