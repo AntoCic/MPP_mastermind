@@ -149,18 +149,18 @@ tryE.addEventListener("click", () => {
     bt_5.dataset.value !== "0"
   ) {
     const userCombination = getUserCombination();
-    const matching = checkMatching(combination, userCombination);
-    showResult(matching, userCombination);
+    const {correctNumber, correctPosition} = checkMatching(combination, userCombination);
+    showResult(correctNumber, correctPosition, userCombination);
     
 
     if (maxRounds - idCounter === 0) {
-      if (isWon(matching[1])) {
+      if (isWon(correctPosition)) {
         modal_container.appendChild(generateModalWin());
       } else {
         header_score.textContent = getScore();
         modal_container.appendChild(generateModalGameOver());
       }
-    } else if (isWon(matching[1])) {
+    } else if (isWon(correctPosition)) {
       modal_container.appendChild(generateModalWin());
     } else {
       header_score.textContent = getScore();
@@ -200,12 +200,12 @@ function checkMatching(comb, userComb) {
       correctPosition++;
     }
   }
-  return [correctNumber, correctPosition];
+  return {correctNumber, correctPosition};
 }
 
 // Funzione che crea un elemento nel DOM che mostra il risultato
 // della combinazione inserita
-function showResult(matching, userCombination) {
+function showResult(correctNumber, correctPosition, userCombination) {
   const hr = document.createElement("hr");
   hr.classList.add("border", "border-1", "my-1");
   game.prepend(hr);
@@ -214,10 +214,10 @@ function showResult(matching, userCombination) {
   col_4.classList.add("col-4");
   const brain_box = document.createElement("div");
   brain_box.classList.add("brain-box");
-  for (let index = 1; index <= matching[0]; index++) {
+  for (let index = 1; index <= correctNumber; index++) {
     const img = document.createElement("img");
     img.setAttribute("src", "./img/points/" + String(index) + ".svg");
-    if (index <= matching[1]) {
+    if (index <= correctPosition) {
       img.classList.add("positio-correct");
     }
     brain_box.appendChild(img);
